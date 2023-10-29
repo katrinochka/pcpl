@@ -28,15 +28,15 @@ def levenstein(s1, s2):
         for row in range(1, rows):
             #Сравнение текущих букв
             if s1[row-1] == s2[col-1]:
-                cost = 0
+                flag = 0
             else:
-                cost = 1
+                flag = 1
             mas[row][col] = min(mas[row-1][col] + 1,      # удаление 
                                 mas[row][col-1] + 1,      # вставка
-                                mas[row-1][col-1] + cost) # замена
+                                mas[row-1][col-1] + flag) # замена
     
             if row > 1 and col > 1 and s1[row-1] == s2[col-2] and s1[row-2] == s2[col-1]:
-                mas[row][col] = min(mas[row][col], mas[row-2][col-2] + cost)
+                mas[row][col] = min(mas[row][col], mas[row-2][col-2] + flag)
 
     print_mas(mas, rows, cols, s1, s2)
     return mas[row][col]
